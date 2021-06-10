@@ -1,4 +1,6 @@
 #!/bin/sh
+set -e
+
 set_env() {
     source ./env.sh
 }
