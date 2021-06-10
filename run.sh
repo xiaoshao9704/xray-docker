@@ -17,6 +17,10 @@ self_signature() {
     sh ./self_signature.sh
 }
 
+certbot() {
+    sh ./certbot.sh
+}
+
 if [ ! -f /xray/info.txt ]
 then
     set_env
@@ -25,7 +29,12 @@ fi
 
 if [ ! -x /xray/certificate ]
 then
-    self_signature
+    if [ "$HOST" != "" ]
+    then
+        certbot
+    else
+        self_signature
+    fi
 fi
 
 cat /xray/info.txt
