@@ -14,7 +14,7 @@ set_config() {
 }
 
 self_signature() {
-    sh ./self_signature.sh /xray/certificate
+    sh ./self_signature.sh
 }
 
 if [ ! -f /xray/info.txt ]
