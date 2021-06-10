@@ -1,5 +1,4 @@
 #!/bin/sh
-
 if [ "$HOST" == "" ]
 then
     HOST="example.com"
