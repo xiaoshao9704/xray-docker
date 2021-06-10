@@ -83,6 +83,10 @@ set_nginx() {
   mkdir -p /run/nginx
 }
 
+set_supervisor() {
+  rm -f /etc/supervisord.conf
+}
+
 set_machine
 set_download_url
 install_xray
