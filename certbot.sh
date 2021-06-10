@@ -16,8 +16,8 @@ TARGET="/xray/certificate"
 
 mkdir -p $TARGET
 
-certbot --nginx -n -d $HOST --agree-tos --email $EMAIL
+certbot --nginx -n -d $HOST --agree-tos --keep --email $EMAIL
 
 rm -f $TARGET/cert $TARGET/key
-ln -s /etc/letsencrypt/live/$EMAIL/fullchain.pem $TARGET/cert
-ln -s /etc/letsencrypt/live/$EMAIL/privkey.pem $TARGET/key
+ln -s /etc/letsencrypt/live/$HOST/fullchain.pem $TARGET/cert
+ln -s /etc/letsencrypt/live/$HOST/privkey.pem $TARGET/key
