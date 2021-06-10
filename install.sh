@@ -75,6 +75,7 @@ install_xray() {
 unzip_xray() {
     echo "unzip xray start"
     unzip -d xray-core *.zip
+    rm -rf ./*.zip
     echo "unzip xray stop"
 }
 
