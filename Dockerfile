@@ -6,7 +6,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
 
 RUN apk add nginx openssl
 
-COPY env.sh install.sh self_signature.sh server.json run.sh /xray/
+COPY env.sh install.sh self_signature.sh server.json.template run.sh /xray/
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
 RUN sh install.sh

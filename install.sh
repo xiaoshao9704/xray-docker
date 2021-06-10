@@ -78,23 +78,6 @@ unzip_xray() {
     echo "unzip xray stop"
 }
 
-self_signature() {
-    sh ./self_signature.sh /xray/certificate
-}
-
-set_env() {
-    source ./env.sh
-}
-
-set_config() {
-    sed -i "s/{{UUID}}/$UUID/g" ./server.json
-    sed -i "s/{{PASSWORD}}/$PASSWORD/g" ./server.json
-    sed -i "s/{{EMAIL}}/$EMAIL/g" ./server.json
-    sed -i "s/{{WEBSOCKET}}/\\$WEBSOCKET/g" ./server.json
-    sed -i "s/{{VMESSTCP}}/\\$VMESSTCP/g" ./server.json
-    sed -i "s/{{VMESSWS}}/\\$VMESSWS/g" ./server.json
-}
-
 set_nginx() {
   mkdir -p /run/nginx
 }
@@ -103,7 +86,4 @@ set_machine
 set_download_url
 install_xray
 unzip_xray
-set_env
-self_signature
-set_config
 set_nginx

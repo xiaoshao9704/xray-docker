@@ -34,9 +34,15 @@ if [ "$VMESSWS" == "" ]
 then
     VMESSWS="/$(cat /proc/sys/kernel/random/uuid)"
 fi
-echo "UUID : $UUID" >> info.txt
-echo "PASSWORD : $PASSWORD" >> info.txt
-echo "EMAIL : $EMAIL" >> info.txt
-echo "WEBSOCKET : $WEBSOCKET" >> info.txt
-echo "VMESSTCP : $VMESSTCP" >> info.txt
-echo "VMESSWS : $VMESSWS" >> info.txt
+
+if [ -f ./info.txt ]
+then
+    rm ./info.txt
+fi
+
+echo "UUID : $UUID" >> ./info.txt
+echo "PASSWORD : $PASSWORD" >> ./info.txt
+echo "EMAIL : $EMAIL" >> ./info.txt
+echo "WEBSOCKET : $WEBSOCKET" >> ./info.txt
+echo "VMESSTCP : $VMESSTCP" >> ./info.txt
+echo "VMESSWS : $VMESSWS" >> ./info.txt
