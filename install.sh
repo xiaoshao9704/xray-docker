@@ -103,7 +103,7 @@ set_machine
 set_download_url
 install_xray
 unzip_xray
-self_signature
 set_env
+self_signature
 set_config
 set_nginx
