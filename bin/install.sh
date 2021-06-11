@@ -92,3 +92,4 @@ set_download_url
 install_xray
 unzip_xray
 set_nginx
+set_supervisor
