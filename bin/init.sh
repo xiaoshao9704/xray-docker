@@ -22,14 +22,24 @@ self_signature() {
 }
 
 certbot_signature() {
-    certbot --nginx -n -d $HOST --agree-tos --keep --email "$(md5sum /proc/sys/kernel/random/uuid | cut -d ' ' -f1)@gmail.com"
+    certbot certonly --nginx -n -d $HOST --agree-tos --keep --email "$(md5sum /proc/sys/kernel/random/uuid | cut -d ' ' -f1)@gmail.com"
     ln -s /etc/letsencrypt/live/$HOST/fullchain.pem $TARGET/cert
     ln -s /etc/letsencrypt/live/$HOST/privkey.pem $TARGET/key
+
+    # set auto renew
+    if [ ! -f /etc/periodic/daily/auto_cert ]
+    then
+        CERTBOT_PATH="$(which certbot)"
+        echo -e "#!/bin/sh\n$CERTBOT_PATH renew" >> /etc/periodic/daily/auto_cert
+        chmod +x /etc/periodic/daily/auto_cert
+    else
+        echo "auto_cert cron has exist"
+    fi
 }
 
 set_cert() {
     TARGET="/xray/certificate"
-    if [ -f $TARGET/cert && -f $TARGET/key ]
+    if [ -f $TARGET/cert -a -f $TARGET/key ]
     then
         return
     fi
