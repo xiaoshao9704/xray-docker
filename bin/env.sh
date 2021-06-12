@@ -21,17 +21,17 @@ fi
 
 if [ "$WEBSOCKET" == "" ]
 then
-    WEBSOCKET="/$(cat /proc/sys/kernel/random/uuid)"
+    WEBSOCKET="/$(md5sum /proc/sys/kernel/random/uuid | cut -d ' ' -f1)"
 fi
 
 if [ "$VMESSTCP" == "" ]
 then
-    VMESSTCP="/$(cat /proc/sys/kernel/random/uuid)"
+    VMESSTCP="/$(md5sum /proc/sys/kernel/random/uuid | cut -d ' ' -f1)"
 fi
 
 if [ "$VMESSWS" == "" ]
 then
-    VMESSWS="/$(cat /proc/sys/kernel/random/uuid)"
+    VMESSWS="/$(md5sum /proc/sys/kernel/random/uuid | cut -d ' ' -f1)"
 fi
 
 if [ -f ./info.txt ]
