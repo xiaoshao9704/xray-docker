@@ -29,12 +29,31 @@ certbot_signature() {
     # set auto renew
     if [ ! -f /etc/periodic/daily/auto_cert ]
     then
-        CERTBOT_PATH="$(which certbot)"
-        echo -e "#!/bin/sh\n$CERTBOT_PATH renew" >> /etc/periodic/daily/auto_cert
+        echo -e "#!/bin/sh\nsh /xray/bin/init.sh renew_cert" >> /etc/periodic/daily/auto_cert
         chmod +x /etc/periodic/daily/auto_cert
     else
         echo "auto_cert cron has exist"
     fi
+}
+
+renew_cert() {
+    if [ ! -f $TARGET/cert -o ! -f $TARGET/key ]
+    then
+        echo "not found cert"
+        exit 1
+    fi
+
+    OLD_KEY="$(md5sum $TARGET/key)"
+    certbot renew
+    NEW_KEY="$(md5sum $TARGET/key)"
+
+    if [ "$OLD_KEY" == "$NEW_KEY" ]
+    then
+        echo "not need renew"
+        exit
+    fi
+
+    supervisorctl restart xray
 }
 
 set_cert() {
@@ -61,6 +80,10 @@ case $1 in
         ;;
     'cert')
         set_cert
+        ;;
+    'renew_cert')
+        TARGET="/xray/certificate"
+        renew_cert
         ;;
     'cert_self')
         TARGET="/xray/certificate"
