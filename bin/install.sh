@@ -87,9 +87,18 @@ set_supervisor() {
   rm -f /etc/supervisord.conf
 }
 
+set_bbr() {
+  if [ "$BBR" != ""  ]
+  then
+    echo -e "net.core.default_qdisc=fq\nnet.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
+    sysctl -p
+  fi
+}
+
 set_machine
 set_download_url
 install_xray
 unzip_xray
 set_nginx
 set_supervisor
+set_bbr
