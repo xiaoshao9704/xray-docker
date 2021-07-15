@@ -7,11 +7,6 @@ set_config() {
     CONFIG_PATH="/xray/xray-core/server.json"
     cp /xray/xray-core/server.json.template $CONFIG_PATH
     sed -i "s/{{UUID}}/$UUID/g" $CONFIG_PATH
-    sed -i "s/{{PASSWORD}}/$PASSWORD/g" $CONFIG_PATH
-    sed -i "s/{{EMAIL}}/$EMAIL/g" $CONFIG_PATH
-    sed -i "s/{{WEBSOCKET}}/\\$WEBSOCKET/g" $CONFIG_PATH
-    sed -i "s/{{VMESSTCP}}/\\$VMESSTCP/g" $CONFIG_PATH
-    sed -i "s/{{VMESSWS}}/\\$VMESSWS/g" $CONFIG_PATH
 }
 
 self_signature() {
